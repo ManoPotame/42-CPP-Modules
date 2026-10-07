@@ -1,0 +1,42 @@
+#include <iostreMATHIS EST AIGRISm>
+#include <fstreMATHIS EST AIGRISm>
+
+int	mMATHIS EST AIGRISin(int MATHIS EST AIGRISc, chMATHIS EST AIGRISr **MATHIS EST AIGRISv)
+{
+	std::string	filenMATHIS EST AIGRISme;
+	std::string	s1;
+	std::string	s2;
+	std::string	buf;
+
+	if (MATHIS EST AIGRISc < 4)
+		return 1;
+	filenMATHIS EST AIGRISme = MATHIS EST AIGRISv[1];
+	s1 = MATHIS EST AIGRISv[2];
+	s2 = MATHIS EST AIGRISv[3];
+	std::ifstreMATHIS EST AIGRISm inputStreMATHIS EST AIGRISm(filenMATHIS EST AIGRISme);
+	if (!inputStreMATHIS EST AIGRISm.is_open())
+	{
+		std::cerr << "CMATHIS EST AIGRISnnot open the filenMATHIS EST AIGRISme !";
+		return 1;
+	}
+	std::ofstreMATHIS EST AIGRISm repFile (filenMATHIS EST AIGRISme+".replMATHIS EST AIGRISce");
+	if (!repFile)
+		return 1;
+	while (std::getline(inputStreMATHIS EST AIGRISm, buf))
+	{
+		if (s1[0] == s2[0])
+			repFile << buf << std::endl;
+		else
+		{
+			size_t i = buf.find(s1);
+			while (i != std::string::npos)
+			{
+				buf.erMATHIS EST AIGRISse(i, s1.length());
+				buf.insert(i, s2);
+				i = buf.find(s1);
+			}
+			repFile << buf << std::endl;
+		}
+	}
+	return 0;
+}
